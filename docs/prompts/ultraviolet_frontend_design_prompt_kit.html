@@ -1,0 +1,1205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>NUMBER - Ultraviolet Frontend Design Prompt Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --ink: #121826;
+        --muted: #556070;
+        --line: #d8e0ea;
+        --paper: #ffffff;
+        --navy: #101525;
+        --surface: #f6f8fb;
+        --purple: #5f4ae8;
+        --teal: #008f8c;
+        --gold: #b7791f;
+        --coral: #c94f3d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font: 14px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .print-header {
+        display: none;
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 34px;
+      }
+
+      .cover {
+        min-height: 760px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 42px;
+        color: #ffffff;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(0, 143, 140, 0.26), transparent 30%),
+          radial-gradient(circle at 20% 72%, rgba(95, 74, 232, 0.32), transparent 34%),
+          linear-gradient(135deg, #101525 0%, #18203a 52%, #0d1220 100%);
+        border-radius: 18px;
+        page-break-after: always;
+      }
+
+      .brand {
+        font-size: 13px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #c5ccff;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 26px 0 16px;
+        font-size: 54px;
+        line-height: 1.04;
+        letter-spacing: 0;
+        max-width: 760px;
+      }
+
+      h2 {
+        margin: 44px 0 14px;
+        font-size: 28px;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 26px 0 8px;
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      h4 {
+        margin: 16px 0 8px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ol,
+      ul {
+        margin: 8px 0 16px 22px;
+        padding: 0;
+      }
+
+      li {
+        margin: 4px 0;
+      }
+
+      code {
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+        background: #eef2ff;
+        color: #273077;
+        border-radius: 4px;
+        padding: 1px 5px;
+      }
+
+      pre {
+        margin: 12px 0 16px;
+        padding: 14px 16px;
+        white-space: pre-wrap;
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+        line-height: 1.45;
+        color: #eef4ff;
+        background: #111827;
+        border-radius: 8px;
+        overflow-wrap: anywhere;
+      }
+
+      a {
+        color: #5546d9;
+      }
+
+      .subtitle {
+        max-width: 720px;
+        font-size: 19px;
+        color: #dce4ff;
+      }
+
+      .cover-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 44px;
+      }
+
+      .cover-card {
+        min-height: 110px;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .cover-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: #ffffff;
+      }
+
+      .cover-card span {
+        color: #d0d8f6;
+      }
+
+      .meta {
+        color: #cbd5e1;
+        font-size: 12px;
+      }
+
+      .section {
+        page-break-inside: avoid;
+        border-top: 2px solid var(--navy);
+        padding-top: 16px;
+      }
+
+      .callout {
+        margin: 16px 0;
+        padding: 14px 16px;
+        border-left: 4px solid var(--purple);
+        background: #f2f0ff;
+        border-radius: 8px;
+      }
+
+      .warning {
+        border-left-color: var(--coral);
+        background: #fff4f1;
+      }
+
+      .upgrade {
+        border-left-color: var(--teal);
+        background: #ecfffe;
+      }
+
+      .repo-grid,
+      .audit-grid,
+      .prompt-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .repo-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .audit-grid,
+      .prompt-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .panel {
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 10px;
+        page-break-inside: avoid;
+      }
+
+      .panel h3 {
+        margin-top: 0;
+      }
+
+      .prompt {
+        margin: 18px 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+        page-break-inside: avoid;
+      }
+
+      .prompt-title {
+        padding: 11px 14px;
+        color: #ffffff;
+        background: var(--navy);
+        font-weight: 800;
+      }
+
+      .prompt-body {
+        padding: 14px 16px;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 10px 0 4px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #ffffff;
+        background: var(--purple);
+      }
+
+      .tag.teal {
+        background: var(--teal);
+      }
+
+      .tag.gold {
+        background: var(--gold);
+      }
+
+      .tag.coral {
+        background: var(--coral);
+      }
+
+      .footer-note {
+        margin-top: 42px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 16mm 14mm 14mm;
+        }
+
+        body {
+          font-size: 10.5pt;
+          line-height: 1.45;
+        }
+
+        main {
+          max-width: none;
+          padding: 0;
+        }
+
+        .print-header {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 12mm;
+          padding-top: 2mm;
+          border-bottom: 1px solid #d8dee9;
+          color: #526173;
+          font-size: 8.5pt;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          background: #ffffff;
+          z-index: 20;
+        }
+
+        .cover {
+          min-height: 250mm;
+          border-radius: 0;
+          margin-top: 0;
+        }
+
+        h1 {
+          font-size: 42pt;
+        }
+
+        h2 {
+          font-size: 22pt;
+          page-break-after: avoid;
+        }
+
+        h3,
+        h4 {
+          page-break-after: avoid;
+        }
+
+        .repo-grid,
+        .audit-grid,
+        .prompt-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section {
+          page-break-before: auto;
+        }
+
+        .page-break {
+          page-break-before: always;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-header">NUMBER / Ultraviolet Frontend Design Prompt Kit</div>
+    <main>
+      <section class="cover">
+        <div>
+          <div class="brand">NUMBER / ULTRAVIOLET</div>
+          <h1>Frontend Design Prompt Kit</h1>
+          <p class="subtitle">
+            AstroPay-inspired prompts for Ultraviolet's student booking site, Stellar USDC checkout,
+            auth and identity flows, and admin operations dashboard.
+          </p>
+          <div class="cover-grid">
+            <div class="cover-card">
+              <strong>Reference</strong>
+              <span>AstroPay's current navigation, global payment trust signals, exchange widgets, and business payment pages.</span>
+            </div>
+            <div class="cover-card">
+              <strong>Repo Structure</strong>
+              <span><code>ultraviolet-backend</code>, <code>ultraviolet-frontend</code>, <code>ultraviolet-ops</code>.</span>
+            </div>
+            <div class="cover-card">
+              <strong>Output</strong>
+              <span>Copy-paste implementation prompts with explicit upgrades and no blockchain gimmicks.</span>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          Prepared on May 17, 2026. AstroPay reference pages reviewed: homepage,
+          business page, accept-payments page, and developer docs landing page.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Read This First</h2>
+        <div class="warning callout">
+          <strong>Ruthless boundary:</strong> AstroPay and the earlier Stargate idea are references,
+          not things to clone. Ultraviolet is an education operations product with backend-verified
+          Stellar payments. Do not turn it into a token, NFT, credential, or Soroban demo before
+          payment creation, verification, reconciliation, auth, and admin auditability work.
+        </div>
+        <p>
+          AstroPay is useful because it shows how a money product makes global payments feel simple:
+          clear navigation, trust proof, exchange-rate interaction, concise feature strips, and
+          business payment positioning. Ultraviolet should borrow the clarity, not the brand. The UI
+          must serve students booking education consulting services and admins reconciling payment
+          status against backend-owned truth.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Repo Structure Reference</h2>
+        <p>
+          Use the three-repo reference structure as a separation-of-concerns model, but keep
+          Ultraviolet's real split. A contract repo is not justified for the MVP.
+        </p>
+        <div class="repo-grid">
+          <div class="panel">
+            <h3>ultraviolet-backend</h3>
+            <p>Rust backend for payment truth, auth, identity, reconciliation, admin APIs, and audit logs.</p>
+            <ul>
+              <li>Owns invoice/payment state.</li>
+              <li>Verifies Stellar facts server-side.</li>
+              <li>Protects student PII.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>ultraviolet-frontend</h3>
+            <p>Next.js frontend for public booking, checkout, admin dashboard, and auth flows.</p>
+            <ul>
+              <li>Displays backend status.</li>
+              <li>Collects student intake.</li>
+              <li>Never decides payment truth.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>ultraviolet-ops</h3>
+            <p>Deployment, environment contracts, runbooks, production gates, and incident response.</p>
+            <ul>
+              <li>Database and service orchestration.</li>
+              <li>Reconciliation runbooks.</li>
+              <li>Security and launch checklists.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Header rule:</strong> brand docs and README headers as <code>NUMBER / Ultraviolet</code>
+          until final brand identity is locked.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>AstroPay Reference Audit</h2>
+        <div class="audit-grid">
+          <div class="panel">
+            <h3>Patterns Worth Reusing</h3>
+            <ul>
+              <li>Top-level navigation that separates user types and product lines.</li>
+              <li>Dark hero with a direct borderless-money promise.</li>
+              <li>Exchange-rate widget near the hero as proof of utility.</li>
+              <li>Trust proof near conversion CTAs.</li>
+              <li>Simple action verbs for product sections.</li>
+              <li>Business page focused on reach, cost, speed, and developer integration.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Ultraviolet Must Improve</h3>
+            <ul>
+              <li>AstroPay is broad fintech. Ultraviolet needs education-intake specificity.</li>
+              <li>Ratings are not enough. Show backend status, payment status, and admin auditability.</li>
+              <li>Checkout must explain Stellar verification without exposing students to protocol noise.</li>
+              <li>Auth and identity need first-class UI, not a login modal afterthought.</li>
+              <li>AI output is advisory metadata only, never payment or eligibility truth.</li>
+              <li>No frontend state may downgrade or verify payment status.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2>Prompt 00 - Preflight Boundary</h2>
+        <div class="prompt">
+          <div class="prompt-title">00-A / Audit Before Building UI</div>
+          <div class="prompt-body">
+            <pre>Audit the Ultraviolet frontend task before writing code.
+
+Repos:
+- ultraviolet-backend owns auth, payment truth, reconciliation, applicant records, and audit logs.
+- ultraviolet-frontend owns public booking UI, checkout UI, admin UI, and display-only status.
+- ultraviolet-ops owns environment contracts, deployment, and runbooks.
+
+Required output:
+- Which repo owns the change.
+- Which backend endpoint or mock contract the frontend depends on.
+- Which PII fields are touched.
+- Which payment states are display-only.
+- Which auth role can access the screen.
+- Which AstroPay pattern is being adapted.
+- Which pattern must be rejected because it is brand-specific, consumer-only, or unsafe.
+
+Hard rules:
+- Do not use AstroPay logos, images, exact text, or protected trade dress.
+- Do not create a contract repo for the MVP.
+- Do not mark payments paid, verified, settled, or failed from frontend-only state.
+- Do not expose applicant/admin records through public routes.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Prompt 01 - Design System</h2>
+        <div class="prompt">
+          <div class="prompt-title">01-A / Ultraviolet Tokens</div>
+          <div class="prompt-body">
+            <div class="tag-row">
+              <span class="tag">Frontend</span>
+              <span class="tag teal">Design System</span>
+            </div>
+            <pre>Create the Ultraviolet design-token foundation for a Next.js App Router app.
+
+Reference AstroPay's confidence and simplicity, but create an original education-fintech identity.
+
+Required tokens:
+- Background dark: #101525.
+- Surface dark: #18203A.
+- Surface light: #F7F9FC.
+- Primary action: #5F4AE8.
+- Success / verified: #008F8C.
+- Pending / review: #B7791F.
+- Error / failed: #C94F3D.
+- Education accent: #2F6FED.
+- Text primary dark: #FFFFFF.
+- Text primary light: #121826.
+- Muted text: #556070.
+- Border: #D8E0EA.
+
+Output:
+- tailwind.config.ts theme extension.
+- app/globals.css CSS variables.
+- semantic aliases for payment, applicant, and auth states.
+- dark mode via class strategy.
+- Storybook token page that renders all colors, radii, shadows, and status colors.</pre>
+            <div class="upgrade callout">
+              <strong>Upgrade:</strong> use semantic state tokens. The payment UI must remain truthful even if the brand palette changes.
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">01-B / Typography, Layout, Motion</div>
+          <div class="prompt-body">
+            <pre>Build Ultraviolet's typography, spacing, radius, and motion primitives.
+
+Requirements:
+- Font: Inter via next/font for UI.
+- Mono: JetBrains Mono for payment IDs, Stellar memos, wallet addresses, and audit IDs.
+- Type scale: display 48, h1 36, h2 28, h3 22, body 16, small 13, label 11 uppercase.
+- Spacing: 4px base grid with 4, 8, 12, 16, 24, 32, 48, 64, 96.
+- Radius: 4px controls, 8px cards, 12px dialogs, full pills.
+- Motion: 120ms controls, 180ms drawers, 240ms modals, reduce-motion support.
+
+Output:
+- app/fonts.ts.
+- CSS utility layer.
+- Storybook page showing typography on light and dark surfaces.
+
+Do not scale font size with viewport width. Text must not overflow buttons, sidebar labels, status badges, or table cells.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Prompt 02 - Header And Navigation</h2>
+        <div class="prompt">
+          <div class="prompt-title">02-A / Public Header Branded As NUMBER / Ultraviolet</div>
+          <div class="prompt-body">
+            <div class="tag-row">
+              <span class="tag">Header</span>
+              <span class="tag gold">NUMBER</span>
+            </div>
+            <pre>Build the Ultraviolet public header inspired by AstroPay's clear product navigation.
+
+Brand requirement:
+- Top-left lockup reads: NUMBER / Ultraviolet.
+- Do not use AstroPay colors, logos, product labels, or copy verbatim.
+
+Desktop:
+- Left: NUMBER / Ultraviolet logo lockup.
+- Center nav: Services, How it works, Payments, Institutions, Resources.
+- Payments menu: Stellar USDC checkout, Payment status, Refund policy, Security.
+- Resources menu: Student guide, Counselor guide, FAQs, Contact.
+- Right: Student sign in, Admin sign in, Book consultation.
+- On scroll: accessible backdrop-blur header with 1px border.
+
+Mobile:
+- Hamburger opens full-height drawer.
+- Drawer uses accordion groups.
+- Bottom sticky CTA: Book consultation.
+- Escape closes drawer, focus returns to hamburger, and body scroll is locked.</pre>
+            <div class="upgrade callout">
+              <strong>Upgrade:</strong> split student and admin entry points clearly. A public education site with hidden admin access becomes messy fast.
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">02-B / Authenticated Admin Header</div>
+          <div class="prompt-body">
+            <pre>Create the authenticated Ultraviolet admin header.
+
+Layout:
+- Left: page title and environment badge, Local / Testnet / Production.
+- Center: Cmd+K search for applicants, payment requests, notes, and tasks.
+- Right: notifications, support menu, admin role badge, user avatar.
+
+Rules:
+- Testnet and Production must be visually impossible to confuse.
+- Avatar menu includes Profile, Security, Team, Audit log, Sign out.
+- Display session status from backend-owned /me endpoint only.
+- Do not store admin credentials or tokens in localStorage.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2>Prompt 03 - Public Site</h2>
+        <div class="prompt">
+          <div class="prompt-title">03-A / Hero And Trust Strip</div>
+          <div class="prompt-body">
+            <pre>Build the Ultraviolet homepage hero.
+
+Reference:
+- AstroPay leads with a clear borderless-money promise, app CTAs, ratings, and an exchange widget.
+
+Ultraviolet version:
+- H1: "Book education support. Pay globally. Stay in control."
+- Supporting copy explains education consulting, secure intake, Stellar USDC payment requests, and admin-reviewed progress.
+- Primary CTA: Book consultation.
+- Secondary CTA: Check payment status.
+- Right side: real product preview showing service booking, payment request, and admin status timeline.
+- Below hero: trust strip with "PII off-chain", "Backend-verified payments", "Admin-reviewed intake", "Stellar USDC supported".
+
+Do not invent fake production metrics. If metrics are examples, label them as demo values.</pre>
+            <div class="upgrade callout">
+              <strong>Upgrade:</strong> AstroPay sells broad money movement. Ultraviolet must sell trust around student data and payment verification.
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">03-B / Service And Institution Sections</div>
+          <div class="prompt-body">
+            <pre>Create the public service sections.
+
+Sections:
+- Choose a service: consultation, application review, institution matching, visa-prep support.
+- Submit intake: goals, destination, timeline, documents status, contact details.
+- Pay securely: Stellar USDC request with backend verification.
+- Track progress: admin-reviewed tasks and next steps.
+
+Design:
+- Four concise feature panels, not a decorative card wall.
+- Use real workflow visuals, not abstract blobs.
+- Include an institution discovery section with filters by country, program type, and budget range.
+- Include FAQs for payment status, refunds, privacy, and data retention.
+
+Accessibility:
+- All CTAs have visible focus.
+- Motion respects prefers-reduced-motion.
+- Payment state is not communicated by color alone.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Prompt 04 - Auth And Identity</h2>
+        <div class="prompt">
+          <div class="prompt-title">04-A / Student And Admin Auth</div>
+          <div class="prompt-body">
+            <div class="tag-row">
+              <span class="tag coral">Auth</span>
+              <span class="tag teal">Identity</span>
+              <span class="tag">Frontend</span>
+            </div>
+            <pre>Build Ultraviolet auth screens.
+
+Routes:
+- /login
+- /register
+- /forgot-password
+- /reset-password
+- /verify-email
+- /admin/login
+- /admin/mfa
+
+Design:
+- Use NUMBER / Ultraviolet header on auth pages.
+- Forms must be compact, trustworthy, and password-manager friendly.
+- Student and admin entry points must be visually distinct.
+- Admin login must support MFA.
+
+Security UX:
+- Never store tokens in localStorage.
+- Use secure HTTP-only cookie session assumed from ultraviolet-backend.
+- Show generic invalid-login errors.
+- Rate-limit messaging must not reveal whether an email exists.
+- MFA screen supports authenticator code and recovery code.
+
+Output:
+- Typed form components.
+- zod schemas.
+- Loading, disabled, success, and error states.
+- Tests for keyboard submission and error rendering.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">04-B / Student Identity And Intake Consent</div>
+          <div class="prompt-body">
+            <pre>Design the student identity and consent flow.
+
+Routes:
+- /intake/profile
+- /intake/education
+- /intake/goals
+- /intake/documents
+- /intake/review
+
+Steps:
+1. Contact profile: name, email, phone, country.
+2. Education background: current level, target program, grades summary.
+3. Goals: destination countries, budget range, timeline, support type.
+4. Documents status: passport, transcript, language test, visa records as status only unless upload policy exists.
+5. Consent and review: explain data usage before submission.
+
+Rules:
+- Each step autosaves through backend endpoints.
+- Sensitive fields explain why they are needed.
+- Mask sensitive values after save.
+- Do not send sensitive documents to AI APIs without explicit consent and policy.
+- AI output is advisory metadata only.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">04-C / Admin Roles And Access UI</div>
+          <div class="prompt-body">
+            <pre>Build the Team and Access page for admins.
+
+Features:
+- Invite teammate modal.
+- Roles: Owner, Admin, Counselor, Finance, Viewer.
+- Permission matrix with plain-language descriptions.
+- Pending invites table.
+- Active sessions table for the current user.
+- Remove user confirmation dialog requiring typed organization name.
+
+Frontend rules:
+- Hide unavailable actions but also handle backend 403 responses gracefully.
+- Do not rely on frontend checks for authorization.
+- Show audit log links for security-sensitive actions.
+- Include empty states and skeletons.
+
+Required tests:
+- Unauthorized role cannot see destructive actions.
+- Backend 403 shows a clean error state.
+- Invite form validates missing email and invalid role.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2>Prompt 05 - Booking And Checkout</h2>
+        <div class="prompt">
+          <div class="prompt-title">05-A / Appointment Booking Flow</div>
+          <div class="prompt-body">
+            <pre>Build the student appointment booking flow.
+
+Steps:
+1. Select service.
+2. Select counselor or "first available".
+3. Pick date and time.
+4. Fill intake summary.
+5. Review service fee.
+6. Create payment request.
+
+Requirements:
+- Mobile-first.
+- Save draft after each step.
+- Show timezone clearly.
+- Validate required fields with zod.
+- Use backend-created payment request; do not calculate final payment truth in the browser.
+- Show privacy note before collecting PII.
+
+Upgrade over AstroPay:
+- Pair payment UX with education workflow context so students know what happens after paying.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">05-B / Stellar USDC Hosted Checkout</div>
+          <div class="prompt-body">
+            <pre>Build hosted checkout at /pay/[publicId].
+
+Layout:
+- Mobile-first max width 480px.
+- Ultraviolet logo, service summary, payment amount, and payment memo.
+- "Secured by Ultraviolet" with a concise explanation: PII stays off-chain; payment is verified by backend.
+- Freighter wallet action if available.
+- Manual payment instructions with destination, asset, amount, and memo.
+- Copy buttons for destination and memo.
+- QR code if backend provides payment URI.
+
+States:
+- Loading request.
+- Expired request.
+- Waiting for payment.
+- Submitted by wallet.
+- Verifying on Stellar.
+- Verified by backend.
+- Failed verification.
+- Backend unavailable.
+
+Hard rules:
+- The browser submits transaction evidence, then waits for backend verification.
+- Do not show success just because a wallet submitted.
+- Unknown transaction hash must not stay pending forever without retry or expiration copy.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">05-C / Payment Result Screens</div>
+          <div class="prompt-body">
+            <pre>Create checkout result screens.
+
+Success:
+- "Payment verified" headline.
+- Amount, asset, payment ID, and transaction hash.
+- Receipt download if backend supports it.
+- Next step: "Your counselor will review your intake."
+
+Pending:
+- Verification checklist: transaction exists, successful, destination, amount, asset, memo, hash uniqueness.
+- Poll backend status every 3 seconds with backoff.
+
+Failure:
+- Human-readable reason such as wrong memo, wrong amount, wrong asset, duplicate hash, not found, or network unavailable.
+- Try again.
+- Contact support.
+- Preserve checkout state.
+
+Accessibility:
+- Status changes announced via aria-live.
+- No decorative success animation if reduce-motion is enabled.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Prompt 06 - Admin Dashboard</h2>
+        <div class="prompt">
+          <div class="prompt-title">06-A / Dashboard Shell</div>
+          <div class="prompt-body">
+            <pre>Create the Ultraviolet admin dashboard shell.
+
+Layout:
+- Left sidebar 248px expanded, 68px collapsed.
+- Sidebar sections: Overview, Applicants, Appointments, Payments, Tasks, Institutions, AI Notes, Audit Log, Settings.
+- Sidebar header: organization switcher if multi-office support exists.
+- Sidebar footer: environment, role, support status.
+- Mobile: bottom tab bar for Overview, Applicants, Payments, Tasks, Settings.
+
+Visual:
+- Quiet operational UI. No oversized marketing hero inside the dashboard.
+- 8px card radius.
+- Dense but readable tables.
+- Status colors map to semantic tokens.
+
+Data:
+- Use backend /me and /admin/context to hydrate app shell.
+- Show skeletons until data loads.
+- Production and local/testnet must be visually distinct.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">06-B / Overview Analytics</div>
+          <div class="prompt-body">
+            <pre>Build the admin Overview page.
+
+KPI row:
+- New applicants.
+- Booked consultations.
+- Payment requests created.
+- Verified payments.
+- Payments needing review.
+
+Main content:
+- Applicant funnel chart: intake started, submitted, payment requested, paid, counselor assigned.
+- Recent applicants table.
+- Recent payments table.
+- Alerts panel for failed verification, duplicate hashes, expired requests, missing intake fields.
+
+Rules:
+- Use sample data only behind clearly named demo mode.
+- All money is rendered from minor units or precise decimal strings.
+- A payment can only display "verified" if backend status says verified_on_stellar.</pre>
+            <div class="upgrade callout">
+              <strong>Upgrade:</strong> AstroPay-style metrics are money-centric. Ultraviolet needs a combined operations view: applicants plus payment risk.
+            </div>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">06-C / Applicant Detail Drawer</div>
+          <div class="prompt-body">
+            <pre>Build an applicant detail drawer.
+
+Trigger:
+- Admin clicks an applicant row.
+
+Content:
+- Applicant summary with PII masked where appropriate.
+- Intake completeness checklist.
+- Service request.
+- Payment request status.
+- Payment verification timeline.
+- Counselor notes.
+- AI advisory summary with "human review required" label.
+- Audit events for viewed/changed applicant state.
+
+Actions:
+- Assign counselor.
+- Request missing information.
+- Create payment request.
+- Mark internal task complete.
+
+Hard rules:
+- Do not expose applicant detail through public routes.
+- Do not leak full PII in logs or UI copy intended for screenshots.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2>Prompt 07 - Payment Operations</h2>
+        <div class="prompt">
+          <div class="prompt-title">07-A / Payment Requests Manager</div>
+          <div class="prompt-body">
+            <pre>Build the Payment Requests page.
+
+List:
+- Search, filters, column visibility, pagination.
+- Columns: Payment ID, Applicant, Service, Amount, Asset, Memo, Status, Expires, Transaction Hash, Created.
+
+Create modal:
+1. Select applicant and service.
+2. Confirm amount and asset.
+3. Generate backend-owned memo.
+4. Review destination account and expiry.
+5. Share payment link.
+
+Validation:
+- Backend generates payment ID and memo.
+- Frontend cannot edit memo after creation.
+- URL fields require HTTPS except localhost in development.
+
+Statuses:
+- created
+- awaiting_payment
+- submitted_for_verification
+- verified_on_stellar
+- failed_verification
+- expired
+- cancelled
+
+Do not allow a verified payment to be downgraded from UI actions.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">07-B / Verification Detail Drawer</div>
+          <div class="prompt-body">
+            <pre>Build the payment verification detail drawer.
+
+Content:
+- Expected destination.
+- Expected amount.
+- Expected asset.
+- Expected memo.
+- Submitted transaction hash.
+- Backend verification result.
+- Failure reason if any.
+- Reconciliation attempts and timestamps.
+- Duplicate hash warning if applicable.
+
+Checklist display:
+- Transaction exists on configured Stellar network.
+- Transaction successful.
+- Hash unused.
+- Destination matches.
+- Amount matches.
+- Asset matches.
+- Memo matches.
+- Payment request ownership matches.
+- Fee-bump, muxed account, path payment, and multi-operation policy handled.
+
+Only backend data can check an item. The frontend must not infer checklist success locally.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Prompt 08 - AI Advisory Workflow</h2>
+        <div class="prompt">
+          <div class="prompt-title">08-A / Intake Quality Assistant</div>
+          <div class="prompt-body">
+            <pre>Build AI advisory UI for admin intake review.
+
+Allowed AI outputs:
+- Missing intake fields.
+- Unclear student goals.
+- Suggested follow-up questions.
+- Duplicate or suspicious lead flag.
+- Service type classification.
+- Admin response draft for human review.
+
+UI:
+- AI Notes panel inside applicant detail.
+- Advisory badge, never truth badge.
+- "Accept suggestion", "Dismiss", and "Edit before sending" actions.
+- Show model/source timestamp if backend provides it.
+
+Forbidden:
+- Do not use AI to verify payment.
+- Do not use AI to make final visa, legal, financial, or admission eligibility decisions.
+- Do not send sensitive documents to third-party AI without explicit consent and data policy.</pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Prompt 09 - Shared Components</h2>
+        <div class="prompt-grid">
+          <div class="prompt">
+            <div class="prompt-title">09-A / Status Badge</div>
+            <div class="prompt-body">
+              <pre>Create StatusBadge.
+
+States:
+- intake_started
+- intake_submitted
+- payment_requested
+- awaiting_payment
+- submitted_for_verification
+- verified_on_stellar
+- failed_verification
+- expired
+- assigned
+- review_required
+
+Props:
+- status
+- size: sm | md | lg
+- showIcon
+- pulse
+
+Rules:
+- Use lucide-react icons.
+- Include text labels for accessibility.
+- Color is never the only state indicator.
+- Storybook covers all states in light and dark mode.</pre>
+            </div>
+          </div>
+
+          <div class="prompt">
+            <div class="prompt-title">09-B / Money Display</div>
+            <div class="prompt-body">
+              <pre>Create MoneyDisplay.
+
+Props:
+- amountAtomic or decimalString
+- assetCode
+- issuerLabel
+- locale
+- showCode
+- size
+- intent: default | positive | negative | muted
+
+Rules:
+- Do not accept JavaScript floating point numbers for money.
+- Stellar assets preserve 7-decimal precision where relevant.
+- Fiat display uses Intl.NumberFormat only for presentation.
+- Monospace option for reconciliation rows.</pre>
+            </div>
+          </div>
+
+          <div class="prompt">
+            <div class="prompt-title">09-C / Data Table</div>
+            <div class="prompt-body">
+              <pre>Create DataTable compound component.
+
+Features:
+- Sort.
+- Filter.
+- Pagination.
+- Column visibility.
+- Bulk select.
+- Empty states.
+- Skeleton states.
+- Row action menu.
+
+Use it for:
+- Applicants.
+- Appointments.
+- Payment requests.
+- Audit logs.
+- Admin users.</pre>
+            </div>
+          </div>
+
+          <div class="prompt">
+            <div class="prompt-title">09-D / Empty States And Toasts</div>
+            <div class="prompt-body">
+              <pre>Create EmptyState and Toast system.
+
+EmptyState:
+- icon
+- title
+- description
+- action
+- variant: page | card | table
+
+Toasts:
+- success, info, warning, error.
+- optional action button.
+- undo support for reversible actions.
+- aria-live announcements.
+
+No empty state should explain the whole product. It should tell the user the next action.</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section page-break">
+        <h2>Prompt 10 - Quality Gate</h2>
+        <div class="prompt">
+          <div class="prompt-title">10-A / Frontend Acceptance Tests</div>
+          <div class="prompt-body">
+            <pre>Create frontend acceptance tests for ultraviolet-frontend.
+
+Required checks:
+- Public header desktop and mobile navigation.
+- Student auth form validation.
+- Admin login failure message does not leak account existence.
+- Admin dashboard requires authenticated session.
+- Testnet and Production are visually distinct.
+- Booking form validates required fields.
+- Hosted checkout never shows success before backend verified status.
+- Payment verification drawer displays all backend checks.
+- AI notes are clearly advisory.
+- Keyboard navigation works for drawer, modal, and menu.
+
+Run:
+- npm run lint
+- npm run typecheck
+- npm run test
+- npm run build
+
+If a command does not exist, add it or document why it is not available.</pre>
+          </div>
+        </div>
+
+        <div class="prompt">
+          <div class="prompt-title">10-B / Design Review Checklist</div>
+          <div class="prompt-body">
+            <pre>Review the Ultraviolet frontend before shipping.
+
+Reject the work if:
+- It visually copies AstroPay too closely.
+- It uses fake metrics without a demo label.
+- It lets the frontend decide payment truth.
+- It hides auth, identity, or admin access edge cases.
+- It cannot distinguish local/testnet/production.
+- Applicant tables break on mobile.
+- Text overflows buttons or badges.
+- It uses decorative blobs instead of useful product visuals.
+- It lacks loading, empty, error, and unauthorized states.
+- It introduces a contract feature without a backend-owned payment reason.</pre>
+            <div class="warning callout">
+              <strong>Brutal truth:</strong> a polished education-fintech frontend that lies about payment state is worse than a plain one. Trust is a system property, not a design style.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Implementation Order</h2>
+        <ol>
+          <li>Put this prompt kit in <code>ultraviolet-frontend/docs/prompts/</code>.</li>
+          <li>Add README headers using <code>NUMBER / Ultraviolet</code>.</li>
+          <li>Implement tokens, header, auth, and app shell before marketing polish.</li>
+          <li>Build booking and checkout flows around backend-owned payment requests.</li>
+          <li>Add admin dashboard only after applicant and payment API contracts are clear.</li>
+          <li>Add tests for auth, booking validation, checkout status, and payment verification display.</li>
+        </ol>
+        <div class="footer-note">
+          Sources reviewed: https://www.astropay.com, https://www.astropay.com/business,
+          https://www.astropay.com/business/accept-astropay, and https://developers-wallet.astropay.com.
+          This document adapts product patterns only; it does not grant permission to reuse AstroPay protected assets.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

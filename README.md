@@ -1,8 +1,24 @@
-# Ultraviolet Frontend
+# NUMBER / Ultraviolet Frontend
 
 Next.js App Router frontend for Ultraviolet merchant payment operations and public Stellar USDC checkout.
 
 This repo owns user interaction only. It does not own payment truth. The UI may request invoices, build checkout screens, ask Freighter to sign, submit signed material to the backend, and poll backend status. It must never mark invoices `paid`, `settled`, or `failed`.
+
+## Frontend Design Prompt Kit
+
+PDF:
+
+```text
+docs/prompts/ultraviolet_frontend_design_prompt_kit.pdf
+```
+
+Editable source:
+
+```text
+docs/prompts/ultraviolet_frontend_design_prompt_kit.html
+```
+
+The prompt kit uses AstroPay as a UX reference only. Do not copy AstroPay branding, assets, text, or protected trade dress. The implementation must remain Ultraviolet-specific: education intake, backend-verified Stellar payments, admin workflow, auth, identity, and auditability.
 
 ## Responsibilities
 
