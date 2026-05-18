@@ -88,6 +88,10 @@ npm run typecheck
 npm run build
 ```
 
+## License
+
+Open source under the MIT License. See [LICENSE](./LICENSE).
+
 ## Production Gaps
 
 - Authenticated merchant sessions are not complete in this frontend split.
